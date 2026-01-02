@@ -1,0 +1,68 @@
+---
+sidebar_id: aiSidebar
+sidebar_position: 2
+---
+
+# Machine Learning Basics
+
+Machine Learning (ML) is a subset of AI that enables systems to learn and improve from experience without being explicitly programmed.
+
+## Types of Machine Learning
+
+### Supervised Learning
+
+Learning from labeled training data to make predictions or decisions.
+
+**Examples:**
+- Classification: Spam detection, image recognition
+- Regression: Price prediction, weather forecasting
+
+```python
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+# Load and prepare data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Train model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Make predictions
+predictions = model.predict(X_test)
+```
+
+### Unsupervised Learning
+
+Finding patterns in data without labeled examples.
+
+**Examples:**
+- Clustering: Customer segmentation, anomaly detection
+- Dimensionality Reduction: Feature extraction, data visualization
+
+### Reinforcement Learning
+
+Learning through interaction with an environment to maximize rewards.
+
+**Examples:**
+- Game playing (Chess, Go)
+- Autonomous vehicles
+- Robotics
+
+## Common Algorithms
+
+- **Linear Regression**: Predicting continuous values
+- **Decision Trees**: Classification and regression
+- **Random Forest**: Ensemble learning method
+- **Neural Networks**: Deep learning models
+- **K-Means**: Clustering algorithm
+- **Support Vector Machines**: Classification
+
+## Best Practices
+
+1. **Data Quality**: Clean, relevant data is crucial
+2. **Feature Engineering**: Select and transform features effectively
+3. **Model Selection**: Choose the right algorithm for your problem
+4. **Validation**: Use cross-validation to avoid overfitting
+5. **Monitoring**: Track model performance in production
+

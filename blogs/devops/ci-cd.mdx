@@ -1,0 +1,125 @@
+---
+sidebar_id: devopsSidebar
+sidebar_position: 4
+---
+
+# CI/CD Pipeline
+
+Continuous Integration (CI) and Continuous Deployment (CD) automate the process of building, testing, and deploying applications.
+
+## CI/CD Concepts
+
+### Continuous Integration
+
+- Developers merge code frequently
+- Automated builds and tests run on each commit
+- Early detection of integration issues
+
+### Continuous Deployment
+
+- Automatically deploy code to production
+- Requires comprehensive testing
+- Enables rapid iteration
+
+## GitHub Actions Example
+
+```yaml
+# .github/workflows/ci.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run tests
+      run: npm test
+    
+    - name: Run linter
+      run: npm run lint
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build Docker image
+      run: docker build -t my-app:${{ github.sha }} .
+    
+    - name: Push to registry
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        docker push my-app:${{ github.sha }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Deploy to production
+      run: |
+        # Deployment commands
+        kubectl set image deployment/my-app app=my-app:${{ github.sha }}
+```
+
+## GitLab CI Example
+
+```yaml
+# .gitlab-ci.yml
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  image: node:18
+  script:
+    - npm ci
+    - npm test
+    - npm run lint
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+
+deploy:
+  stage: deploy
+  script:
+    - kubectl set image deployment/my-app app=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  only:
+    - main
+```
+
+## Best Practices
+
+1. **Fast Feedback**: Keep pipelines fast
+2. **Parallel Execution**: Run tests in parallel
+3. **Environment Parity**: Match production closely
+4. **Security**: Scan for vulnerabilities
+5. **Rollback Strategy**: Plan for failures
+

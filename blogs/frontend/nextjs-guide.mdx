@@ -1,0 +1,155 @@
+---
+sidebar_id: frontendSidebar
+sidebar_position: 3
+---
+
+# Next.js Guide
+
+Next.js is a React framework that enables server-side rendering, static site generation, and API routes.
+
+## Key Features
+
+- **Server-Side Rendering (SSR)**: Render pages on the server
+- **Static Site Generation (SSG)**: Pre-render pages at build time
+- **API Routes**: Build backend API endpoints
+- **File-based Routing**: Automatic routing based on file structure
+- **Image Optimization**: Built-in image optimization
+- **Font Optimization**: Automatic font optimization
+
+## Getting Started
+
+```bash
+# Create a new Next.js app
+npx create-next-app@latest my-app
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+## Pages and Routing
+
+### File-based Routing
+
+```
+pages/
+  index.js          → /
+  about.js          → /about
+  blog/
+    [id].js         → /blog/:id
+    [...slug].js    → /blog/* (catch-all)
+```
+
+### Dynamic Routes
+
+```jsx
+// pages/blog/[id].js
+import { useRouter } from 'next/router';
+
+export default function BlogPost() {
+  const router = useRouter();
+  const { id } = router.query;
+
+  return <div>Post ID: {id}</div>;
+}
+```
+
+## Data Fetching
+
+### getServerSideProps (SSR)
+
+```jsx
+export async function getServerSideProps(context) {
+  const res = await fetch(`https://api.example.com/data`);
+  const data = await res.json();
+
+  return {
+    props: {
+      data,
+    },
+  };
+}
+
+function Page({ data }) {
+  return <div>{/* Use data */}</div>;
+}
+```
+
+### getStaticProps (SSG)
+
+```jsx
+export async function getStaticProps() {
+  const res = await fetch(`https://api.example.com/data`);
+  const data = await res.json();
+
+  return {
+    props: {
+      data,
+    },
+    revalidate: 60, // ISR: Revalidate every 60 seconds
+  };
+}
+```
+
+### getStaticPaths
+
+```jsx
+export async function getStaticPaths() {
+  const res = await fetch(`https://api.example.com/posts`);
+  const posts = await res.json();
+
+  const paths = posts.map((post) => ({
+    params: { id: post.id.toString() },
+  }));
+
+  return { paths, fallback: false };
+}
+```
+
+## API Routes
+
+```jsx
+// pages/api/users/[id].js
+export default function handler(req, res) {
+  const { id } = req.query;
+
+  if (req.method === 'GET') {
+    // Handle GET request
+    res.status(200).json({ id, name: 'John Doe' });
+  } else if (req.method === 'POST') {
+    // Handle POST request
+    res.status(201).json({ success: true });
+  }
+}
+```
+
+## App Router (Next.js 13+)
+
+```jsx
+// app/page.js
+export default function Page() {
+  return <div>Home Page</div>;
+}
+
+// app/blog/[id]/page.js
+export default async function BlogPost({ params }) {
+  const { id } = params;
+  const post = await fetchPost(id);
+  
+  return <article>{post.content}</article>;
+}
+```
+
+## Best Practices
+
+1. **Use Image Component**: Optimize images with next/image
+2. **Link Component**: Use next/link for client-side navigation
+3. **Metadata**: Set proper meta tags for SEO
+4. **Error Handling**: Implement error boundaries
+5. **Performance**: Use dynamic imports for code splitting
+

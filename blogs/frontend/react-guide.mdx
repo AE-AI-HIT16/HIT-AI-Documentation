@@ -1,0 +1,198 @@
+---
+sidebar_id: frontendSidebar
+sidebar_position: 2
+---
+
+# React Development Guide
+
+React is a popular JavaScript library for building user interfaces, especially single-page applications.
+
+## Getting Started
+
+### Installation
+
+```bash
+# Create a new React app
+npx create-react-app my-app
+
+# Or with Vite (faster)
+npm create vite@latest my-app -- --template react
+
+# Or with Next.js
+npx create-next-app@latest my-app
+```
+
+### Basic Component
+
+```jsx
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+## Hooks
+
+### useState
+
+Manage component state:
+
+```jsx
+const [state, setState] = useState(initialValue);
+
+// Update state
+setState(newValue);
+setState(prev => prev + 1); // Functional update
+```
+
+### useEffect
+
+Handle side effects:
+
+```jsx
+useEffect(() => {
+  // Side effect code
+  fetchData();
+  
+  // Cleanup function
+  return () => {
+    // Cleanup code
+  };
+}, [dependencies]); // Dependency array
+```
+
+### Custom Hooks
+
+Reusable logic:
+
+```jsx
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err);
+        setLoading(false);
+      });
+  }, [url]);
+
+  return { data, loading, error };
+}
+```
+
+## Performance Optimization
+
+### React.memo
+
+Prevent unnecessary re-renders:
+
+```jsx
+const MemoizedComponent = React.memo(function Component({ prop }) {
+  return <div>{prop}</div>;
+});
+```
+
+### useMemo
+
+Memoize expensive calculations:
+
+```jsx
+const expensiveValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a, b]);
+```
+
+### useCallback
+
+Memoize callback functions:
+
+```jsx
+const handleClick = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+```
+
+## State Management
+
+### Context API
+
+Share state across components:
+
+```jsx
+// Create context
+const ThemeContext = createContext();
+
+// Provider
+function App() {
+  const [theme, setTheme] = useState('light');
+  
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <ChildComponent />
+    </ThemeContext.Provider>
+  );
+}
+
+// Consumer
+function ChildComponent() {
+  const { theme, setTheme } = useContext(ThemeContext);
+  return <div className={theme}>Content</div>;
+}
+```
+
+### Redux Toolkit
+
+Global state management:
+
+```jsx
+// Store
+import { configureStore } from '@reduxjs/toolkit';
+
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+});
+
+// Slice
+import { createSlice } from '@reduxjs/toolkit';
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: { value: 0 },
+  reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
+  },
+});
+```
+
+## Best Practices
+
+1. **Component Structure**: Keep components small and focused
+2. **Props Validation**: Use PropTypes or TypeScript
+3. **Error Boundaries**: Catch and handle errors gracefully
+4. **Code Splitting**: Use React.lazy for route-based splitting
+5. **Testing**: Write tests with React Testing Library
+

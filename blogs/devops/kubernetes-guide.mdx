@@ -1,0 +1,129 @@
+---
+sidebar_id: devopsSidebar
+sidebar_position: 3
+---
+
+# Kubernetes Guide
+
+Kubernetes (K8s) is an open-source container orchestration platform for automating deployment, scaling, and management of containerized applications.
+
+## Key Concepts
+
+### Pods
+
+Smallest deployable unit in Kubernetes:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: app
+    image: my-app:latest
+    ports:
+    - containerPort: 3000
+```
+
+### Deployments
+
+Manage replica sets and rolling updates:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: app
+        image: my-app:latest
+        ports:
+        - containerPort: 3000
+```
+
+### Services
+
+Expose pods to network:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
+```
+
+## Common Commands
+
+```bash
+# Apply configuration
+kubectl apply -f deployment.yaml
+
+# Get pods
+kubectl get pods
+
+# Get services
+kubectl get services
+
+# Describe resource
+kubectl describe pod <pod-name>
+
+# View logs
+kubectl logs <pod-name>
+
+# Execute command in pod
+kubectl exec -it <pod-name> -- /bin/sh
+
+# Delete resource
+kubectl delete -f deployment.yaml
+```
+
+## Ingress
+
+Expose HTTP/HTTPS routes:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-ingress
+spec:
+  rules:
+  - host: myapp.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-app-service
+            port:
+              number: 80
+```
+
+## Best Practices
+
+1. **Resource Limits**: Set CPU and memory limits
+2. **Health Checks**: Configure liveness and readiness probes
+3. **Secrets Management**: Use Kubernetes secrets
+4. **ConfigMaps**: Externalize configuration
+5. **Namespaces**: Organize resources logically
+

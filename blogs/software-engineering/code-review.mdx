@@ -1,0 +1,181 @@
+---
+sidebar_id: softwareEngineeringSidebar
+sidebar_position: 5
+---
+
+# Code Review
+
+Code review is a systematic examination of code to find bugs, improve quality, and share knowledge.
+
+## Code Review Benefits
+
+- **Quality**: Catch bugs before production
+- **Knowledge Sharing**: Team members learn from each other
+- **Consistency**: Maintain coding standards
+- **Security**: Identify security vulnerabilities
+- **Best Practices**: Enforce best practices
+
+## Review Checklist
+
+### Functionality
+
+- [ ] Code works as intended
+- [ ] Edge cases are handled
+- [ ] Error handling is appropriate
+- [ ] Tests are included
+- [ ] No obvious bugs
+
+### Code Quality
+
+- [ ] Code is readable and maintainable
+- [ ] Follows project conventions
+- [ ] No code duplication
+- [ ] Proper naming conventions
+- [ ] Comments explain "why", not "what"
+
+### Performance
+
+- [ ] No obvious performance issues
+- [ ] Efficient algorithms used
+- [ ] Database queries are optimized
+- [ ] No memory leaks
+
+### Security
+
+- [ ] No security vulnerabilities
+- [ ] Input validation present
+- [ ] Authentication/authorization correct
+- [ ] Sensitive data handled properly
+- [ ] No hardcoded secrets
+
+## Review Process
+
+### 1. Pre-Review
+
+```bash
+# Author prepares PR
+- Write clear PR description
+- Link related issues
+- Ensure tests pass
+- Self-review first
+```
+
+### 2. Review
+
+```markdown
+## Review Guidelines
+
+- Be constructive and respectful
+- Explain reasoning for suggestions
+- Approve when ready
+- Request changes when needed
+- Ask questions, don't assume
+```
+
+### 3. Feedback
+
+```markdown
+## Good Feedback Examples
+
+✅ "Consider extracting this logic into a separate function for reusability"
+
+✅ "This might fail if the array is empty. Should we add a check?"
+
+✅ "Great solution! One suggestion: we could use a Set here for O(1) lookup"
+
+❌ "This is wrong"
+
+❌ "Fix this"
+
+❌ "You should know better"
+```
+
+## Review Tools
+
+### GitHub Pull Requests
+
+```markdown
+# PR Template
+## Description
+Brief description of changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+
+## Testing
+- [ ] Unit tests added
+- [ ] Integration tests added
+- [ ] Manual testing done
+```
+
+### Code Review Tools
+
+- **GitHub**: Built-in PR reviews
+- **GitLab**: Merge request reviews
+- **Phabricator**: Code review platform
+- **Reviewable**: GitHub PR enhancement
+
+## Best Practices
+
+### For Authors
+
+1. **Small PRs**: Keep changes focused and small
+2. **Clear Description**: Explain what and why
+3. **Self-Review**: Review your own code first
+4. **Respond Promptly**: Address feedback quickly
+5. **Be Open**: Accept constructive criticism
+
+### For Reviewers
+
+1. **Be Respectful**: Provide constructive feedback
+2. **Be Timely**: Review within 24-48 hours
+3. **Be Thorough**: Check all aspects
+4. **Ask Questions**: Clarify when needed
+5. **Approve When Ready**: Don't block unnecessarily
+
+## Common Issues
+
+### Code Smells
+
+```javascript
+// ❌ Long function
+function processData(data) {
+  // 200 lines of code
+}
+
+// ✅ Short, focused functions
+function validateData(data) { /* ... */ }
+function transformData(data) { /* ... */ }
+function saveData(data) { /* ... */ }
+```
+
+### Anti-patterns
+
+```javascript
+// ❌ Magic numbers
+if (status === 2) { /* ... */ }
+
+// ✅ Named constants
+const STATUS_ACTIVE = 2;
+if (status === STATUS_ACTIVE) { /* ... */ }
+```
+
+## Metrics
+
+Track review metrics:
+
+- **Review Time**: Time to first review
+- **Review Cycles**: Number of iterations
+- **Review Coverage**: Percentage of code reviewed
+- **Defect Rate**: Bugs found in review vs production
+
+## Best Practices
+
+1. **Automate What You Can**: Linters, formatters, tests
+2. **Review Regularly**: Don't let PRs sit
+3. **Pair Programming**: For complex changes
+4. **Document Standards**: Clear coding guidelines
+5. **Celebrate Good Code**: Positive reinforcement
+

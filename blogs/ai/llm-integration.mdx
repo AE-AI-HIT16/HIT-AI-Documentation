@@ -1,0 +1,157 @@
+---
+sidebar_id: aiSidebar
+sidebar_position: 3
+---
+
+# LLM Integration
+
+Large Language Models (LLMs) like GPT, Claude, and Llama have revolutionized how we build AI-powered applications.
+
+## What are LLMs?
+
+Large Language Models are AI systems trained on vast amounts of text data to understand and generate human-like text. They can:
+
+- Answer questions
+- Generate code
+- Write documentation
+- Translate languages
+- Summarize content
+- And much more
+
+## Popular LLM APIs
+
+### OpenAI GPT
+
+```python
+from openai import OpenAI
+
+client = OpenAI(api_key="your-api-key")
+
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Explain machine learning in simple terms."}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+### Anthropic Claude
+
+```python
+import anthropic
+
+client = anthropic.Anthropic(api_key="your-api-key")
+
+message = client.messages.create(
+    model="claude-3-opus-20240229",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Write a Python function to calculate fibonacci numbers"}
+    ]
+)
+
+print(message.content)
+```
+
+### Local LLMs with Ollama
+
+```bash
+# Install Ollama
+curl -fsSL https://ollama.ai/install.sh | sh
+
+# Run a model
+ollama run llama2
+
+# Use in Python
+import ollama
+
+response = ollama.chat(model='llama2', messages=[
+    {'role': 'user', 'content': 'Why is the sky blue?'}
+])
+```
+
+## Integration Patterns
+
+### 1. Chat Interface
+
+Build conversational interfaces using streaming responses:
+
+```python
+def chat_stream(prompt):
+    stream = client.chat.completions.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}],
+        stream=True
+    )
+    
+    for chunk in stream:
+        if chunk.choices[0].delta.content:
+            yield chunk.choices[0].delta.content
+```
+
+### 2. Code Generation
+
+Use LLMs to generate and refactor code:
+
+```python
+def generate_code(description):
+    prompt = f"""
+    Write a Python function that: {description}
+    
+    Requirements:
+    - Include type hints
+    - Add docstrings
+    - Handle edge cases
+    """
+    
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.2
+    )
+    
+    return response.choices[0].message.content
+```
+
+### 3. Documentation Generation
+
+Automatically generate documentation from code:
+
+```python
+def generate_docs(code, language="python"):
+    prompt = f"""
+    Generate comprehensive documentation for this {language} code:
+    
+    {code}
+    
+    Include:
+    - Function/class descriptions
+    - Parameter explanations
+    - Return value descriptions
+    - Usage examples
+    """
+    
+    # Implementation...
+```
+
+## Best Practices
+
+1. **Prompt Engineering**: Write clear, specific prompts
+2. **Token Management**: Monitor and optimize token usage
+3. **Error Handling**: Implement robust error handling
+4. **Rate Limiting**: Respect API rate limits
+5. **Cost Optimization**: Cache responses when possible
+6. **Security**: Never expose API keys in client-side code
+7. **Testing**: Test LLM outputs for accuracy and safety
+
+## Common Use Cases
+
+- **Code Assistants**: GitHub Copilot, Cursor, Codeium
+- **Documentation Tools**: Auto-generate API docs
+- **Content Creation**: Blog posts, social media content
+- **Customer Support**: Chatbots and Q&A systems
+- **Data Analysis**: Summarize reports and insights
+
