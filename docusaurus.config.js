@@ -3,7 +3,7 @@
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Henry Hoang Blog",
+  title: "The HH Lab",
   tagline: "Tech, Code, and Everything In Between",
   url: "https://henryhoang.blog", // Update this to your actual domain
   baseUrl: "/",
@@ -16,13 +16,13 @@ const config = {
     locales: ['en'],
   },
   themeConfig: {
-    image: 'img/socialbanner.png',
+    image: 'img/socialbanner.png',  
     navbar: {
-      title: "Henry Hoang",
+      title: "The HH Lab",
       logo: {
         alt: "Henry Hoang Logo",
-        src: "img/logo.svg",
-        srcDark: "img/logo.svg",
+        src: "img/socialbanner.png",
+        srcDark: "img/socialbanner.png",
         href: "/",
       },
       items: [
