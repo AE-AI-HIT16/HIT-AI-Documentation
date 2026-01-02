@@ -1,2 +1,11 @@
 [files]
-extend-exclude = ["*.svg"] 
+extend-exclude = ["*.svg"]
+
+[default]
+extend-words = [
+  # Azure Kubernetes Service
+  "AKS",
+  # Azure Container Instances
+  "Aci",
+  "AciWebservice",
+] 
