@@ -13,23 +13,7 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  // Main sidebar - Introduction and general topics
-  mainSidebar: [
-    {
-      Introduction: ["index", "introduction", "getting-started", "overview"],
-    },
-    {
-      "Additional links": [
-        "get-help",
-        {
-          type: "link",
-          href: "https://api.example.com/docs",
-          label: "API Reference",
-        },
-        "faq",
-      ],
-    },
-  ],
+
 
   // AI & Machine Learning sidebar
   aiSidebar: [
