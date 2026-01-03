@@ -7,6 +7,14 @@ const config = {
   tagline: "Tech, Code, and Everything In Between",
   url: "https://henryhoang.blog", // Update this to your actual domain
   baseUrl: "/",
+
+  // GitHub Pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: 'henryhoang', // Usually your GitHub org/user name.
+  projectName: 'henryhoang-blog', // Usually your repo name.
+  deploymentBranch: 'gh-pages',
+  trailingSlash: false,
+
   onBrokenLinks: "throw",
   favicon: "img/favicon.ico",
 
@@ -16,7 +24,7 @@ const config = {
     locales: ['en'],
   },
   themeConfig: {
-    image: 'img/socialbanner.png',  
+    image: 'img/socialbanner.png',
     navbar: {
       title: "The HH Lab",
       logo: {
