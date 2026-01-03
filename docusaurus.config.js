@@ -84,6 +84,10 @@ const config = {
     [
       require.resolve('docusaurus-lunr-search'),
       {
+        languages: ['en'],
+        indexBaseUrl: true,
+        highlightResult: true,
+        maxHits: 10,
       },
     ],
   ],
