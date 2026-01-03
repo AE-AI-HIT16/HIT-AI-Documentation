@@ -6,7 +6,7 @@ const config = {
   title: "The HH Lab",
   tagline: "Tech, Code, and Everything In Between",
   url: "https://henryhoang.blog", // Update this to your actual domain
-  baseUrl: "/",
+  baseUrl: "/henryhoang-blog/",
 
   // GitHub Pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
