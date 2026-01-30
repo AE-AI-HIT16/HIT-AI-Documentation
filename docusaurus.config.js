@@ -30,7 +30,7 @@ const config = {
     navbar: {
       title: "AE-AI-HIT16",
       logo: {
-        alt: "Henry Hoang Logo",
+        alt: "HIT Logo",
         src: "img/socialbanner.png",
         srcDark: "img/socialbanner.png",
         href: "/",
