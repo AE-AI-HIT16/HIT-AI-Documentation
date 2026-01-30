@@ -5,6 +5,7 @@ import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import authors from '@site/resources/authors.yml';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import GiscusComponent from '@site/src/components/GiscusComponent';
 
 function Author({ author }) {
   const { name, title, url, image_url } = author;
@@ -55,6 +56,7 @@ export default function ContentWrapper(props) {
     <>
       <AuthorsList authors={docAuthors} />
       <Content {...props} />
+      <GiscusComponent />
     </>
   );
 }
