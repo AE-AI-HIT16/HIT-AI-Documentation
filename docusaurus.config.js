@@ -1,17 +1,19 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "The HH Lab",
-  tagline: "Tech, Code, and Everything In Between",
-  url: "https://henryhoang.blog", // Update this to your actual domain
-  baseUrl: "/henryhoang-blog/",
+  title: "AE-AI-HIT16",
+  tagline: "AE AI HIT16's Blog",
+  url: "http://your-domain.com", // Update this to your actual domain
+  baseUrl: "/",
 
   // GitHub Pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'henryhoang', // Usually your GitHub org/user name.
-  projectName: 'henryhoang-blog', // Usually your repo name.
+  organizationName: 'AE-AI-HIT16', // Usually your GitHub org/user name.
+  projectName: 'AE-AI-HIT16-blog', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
@@ -26,32 +28,40 @@ const config = {
   themeConfig: {
     image: 'img/socialbanner.png',
     navbar: {
-      title: "The HH Lab",
+      title: "AE-AI-HIT16",
       logo: {
-        alt: "Henry Hoang Logo",
+        alt: "HIT Logo",
         src: "img/socialbanner.png",
         srcDark: "img/socialbanner.png",
         href: "/",
       },
       items: [
         {
-          to: '/blog/ai/introduction',
+          type: 'docSidebar',
+          sidebarId: 'aiEngineerSidebar',
           position: 'left',
-          label: 'Blog',
+          label: 'AI Engineer',
         },
         {
-          to: '/tutorial',
+          type: 'docSidebar',
+          sidebarId: 'dataEngineerSidebar',
+          docsPluginId: 'data-engineer',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Data Engineer',
         },
       ],
     },
     footer: {
       style: "dark",
-      copyright: `Copyright © ${new Date().getFullYear()} Henry Hoang. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} AE-HIT-16 team.`,
     },
     prism: {
       additionalLanguages: ["ruby", "php", "java", "groovy", "csharp", "rust", "kotlin"],
+    },
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
     },
   },
   presets: [
@@ -59,30 +69,36 @@ const config = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          path: 'blogs',
-          routeBasePath: "/blog",
+          path: 'resources/01: AI Engineer',
+          routeBasePath: "ai-engineer",
           sidebarPath: require.resolve("./sidebars.js"),
-          sidebarCollapsible: false,
-        },
-        blog: {
-          path: 'tutorials',
-          routeBasePath: '/tutorial',
-          blogTitle: 'Tutorials',
-          blogDescription: 'Tutorials and guides',
-          postsPerPage: 10,
-          showReadingTime: true,
+          sidebarCollapsible: true,
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-        gtag: {
-          trackingID: "G-XXXXXXXXXX",
-          anonymizeIP: true,
-        },
+        // gtag: {
+        //   trackingID: "G-XXXXXXXXXX",
+        //   anonymizeIP: true,
+        // },
       },
     ],
   ],
   plugins: [
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: 'data-engineer',
+        path: 'resources/02: Data Engineer',
+        routeBasePath: 'data-engineer',
+        sidebarPath: require.resolve('./sidebars.js'),
+        sidebarCollapsible: true,
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
+      },
+    ],
     [
       "@docusaurus/plugin-client-redirects",
       {
@@ -98,6 +114,21 @@ const config = {
         maxHits: 10,
       },
     ],
+    () => ({
+      name: 'docusaurus-yaml-loader',
+      configureWebpack() {
+        return {
+          module: {
+            rules: [
+              {
+                test: /\.ya?ml$/,
+                use: 'yaml-loader',
+              },
+            ],
+          },
+        };
+      },
+    }),
   ],
   scripts: [],
   markdown: {
