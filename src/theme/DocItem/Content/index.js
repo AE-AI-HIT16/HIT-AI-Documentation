@@ -2,7 +2,7 @@ import React from 'react';
 import Content from '@theme-original/DocItem/Content';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
-import authors from '@site/blog/authors.yml';
+import authors from '@site/resources/authors.yml';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 

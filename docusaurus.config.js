@@ -39,7 +39,6 @@ const config = {
         {
           type: 'docSidebar',
           sidebarId: 'fresherSidebar',
-          docsPluginId: 'fresher',
           position: 'left',
           label: 'Fresher',
         },
@@ -67,14 +66,14 @@ const config = {
     [
       "@docusaurus/preset-classic",
       {
-        // docs: {
-        //   path: 'blog',
-        //   routeBasePath: "/blog",
-        //   sidebarPath: require.resolve("./sidebars.js"),
-        //   sidebarCollapsible: true,
-        //   remarkPlugins: [remarkMath],
-        //   rehypePlugins: [rehypeKatex],
-        // },
+        docs: {
+          path: 'resources',
+          routeBasePath: "docs",
+          sidebarPath: require.resolve("./sidebars.js"),
+          sidebarCollapsible: true,
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
+        },
         blog: {
           path: 'tutorials',
           routeBasePath: '/tutorial',
@@ -95,18 +94,18 @@ const config = {
     ],
   ],
   plugins: [
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: 'fresher',
-        path: 'fresher',
-        routeBasePath: '/fresher',
-        sidebarPath: require.resolve('./sidebars.js'),
-        sidebarCollapsible: true,
-        remarkPlugins: [remarkMath],
-        rehypePlugins: [rehypeKatex],
-      },
-    ],
+    // [
+    //   "@docusaurus/plugin-content-docs",
+    //   {
+    //     id: 'fresher',
+    //     path: 'fresher',
+    //     routeBasePath: '/fresher',
+    //     sidebarPath: require.resolve('./sidebars.js'),
+    //     sidebarCollapsible: true,
+    //     remarkPlugins: [remarkMath],
+    //     rehypePlugins: [rehypeKatex],
+    //   },
+    // ],
     [
       "@docusaurus/plugin-client-redirects",
       {
