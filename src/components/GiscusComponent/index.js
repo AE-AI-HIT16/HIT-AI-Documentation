@@ -7,10 +7,10 @@ export default function GiscusComponent() {
 
     return (
         <Giscus
-            repo="ghUsername/repoName" // TODO: Replace with your repo
-            repoId="someHash"          // TODO: Replace with your repoId
-            category="Announcements"   // TODO: Replace with your category
-            categoryId="someHash"      // TODO: Replace with your categoryId
+            repo="AE-AI-HIT16/HIT-AI-Documentation" // TODO: Replace with your repo
+            repoId="R_kgDOREh75w"          // TODO: Replace with your repoId
+            category="General"   // TODO: Replace with your category
+            categoryId="DIC_kwDOREh7584C1n94"      // TODO: Replace with your categoryId
             mapping="title"
             term="Welcome to my blog!"
             strict="0"
