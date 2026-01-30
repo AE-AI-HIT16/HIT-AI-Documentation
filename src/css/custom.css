@@ -6,14 +6,15 @@
  */
 
 /* You can override the default Infima variables here. */
+@import "katex/dist/katex.min.css";
 :root {
-  --ifm-color-primary: rgba(1, 130, 227);
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-primary: #FF7A3D;
+  --ifm-color-primary-dark: #E66B2E;
+  --ifm-color-primary-darker: #CC5E28;
+  --ifm-color-primary-darkest: #B35323;
+  --ifm-color-primary-light: #FF8E57;
+  --ifm-color-primary-lighter: #FFA371;
+  --ifm-color-primary-lightest: #FFB88B;
   --ifm-code-font-size: 95%;
 
   --ifm-menu-link-padding-horizontal: 1rem;
@@ -80,15 +81,15 @@ html[data-theme=dark] .header-github-link:before {
   justify-content: center;
   border-radius: 0.375rem;
   border-style: solid;
-  border-color: #2C70FF;
-  background-color: #2C70FF;
+  border-color: #FF7A3D;
+  background-color: #FF7A3D;
   margin-left: 1rem;
   color: #ffffff;
 }
 
 .cta:hover {
-  background-color: #1e4baa;
-  border-color: #1e4baa;
+  background-color: #E66B2E;
+  border-color: #E66B2E;
   color: #ffffff;
 }
 
