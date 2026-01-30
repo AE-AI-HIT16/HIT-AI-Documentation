@@ -192,6 +192,9 @@ Modify the theme in `themeConfig.prism` in `docusaurus.config.js`.
 
 Create components in the `src/components/` directory, then use them in documentation.
 
+## Setup Disqus
+https://blog.thanhnamnguyen.dev/tich-hop-giscus-cho-blog-phan-1
+
 ## More Resources
 
 - [Docusaurus Official Documentation](https://docusaurus.io)
