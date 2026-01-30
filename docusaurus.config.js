@@ -7,13 +7,13 @@ import rehypeKatex from 'rehype-katex';
 const config = {
   title: "AE-AI-HIT16",
   tagline: "AE AI HIT16's Blog",
-  url: "http://your-domain.com", // Update this to your actual domain
-  baseUrl: "/",
+  url: "https://AE-AI-HIT16.github.io", // Update this to your actual domain
+  baseUrl: "/HIT-AI-Documentation/",
 
   // GitHub Pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'AE-AI-HIT16', // Usually your GitHub org/user name.
-  projectName: 'AE-AI-HIT16-blog', // Usually your repo name.
+  projectName: 'HIT-AI-Documentation', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
