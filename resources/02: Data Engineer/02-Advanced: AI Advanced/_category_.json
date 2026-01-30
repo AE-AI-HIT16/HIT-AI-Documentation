@@ -1,9 +1,0 @@
-{
-  "label": "Advanced: AI Advanced",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Advanced AI topics including RAG optimization, LLMOps, and Agentic AI"
-  }
-}
-

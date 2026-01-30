@@ -45,6 +45,7 @@ const config = {
         {
           type: 'docSidebar',
           sidebarId: 'dataEngineerSidebar',
+          docsPluginId: 'data-engineer',
           position: 'left',
           label: 'Data Engineer',
         },
@@ -69,15 +70,7 @@ const config = {
       {
         docs: {
           path: 'resources/01: AI Engineer',
-          routeBasePath: "/ai-engineer",
-          sidebarPath: require.resolve("./sidebars.js"),
-          sidebarCollapsible: true,
-          remarkPlugins: [remarkMath],
-          rehypePlugins: [rehypeKatex],
-        },
-        docs: {
-          path: 'resources/02: Data Engineer',
-          routeBasePath: "/data-engineer",
+          routeBasePath: "ai-engineer",
           sidebarPath: require.resolve("./sidebars.js"),
           sidebarCollapsible: true,
           remarkPlugins: [remarkMath],
@@ -94,18 +87,18 @@ const config = {
     ],
   ],
   plugins: [
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: 'fresher',
-    //     path: 'fresher',
-    //     routeBasePath: '/fresher',
-    //     sidebarPath: require.resolve('./sidebars.js'),
-    //     sidebarCollapsible: true,
-    //     remarkPlugins: [remarkMath],
-    //     rehypePlugins: [rehypeKatex],
-    //   },
-    // ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: 'data-engineer',
+        path: 'resources/02: Data Engineer',
+        routeBasePath: 'data-engineer',
+        sidebarPath: require.resolve('./sidebars.js'),
+        sidebarCollapsible: true,
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
+      },
+    ],
     [
       "@docusaurus/plugin-client-redirects",
       {

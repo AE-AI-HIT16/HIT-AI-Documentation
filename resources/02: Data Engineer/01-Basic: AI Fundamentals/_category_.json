@@ -1,9 +1,0 @@
-{
-  "label": "Basic: AI Fundamentals",
-  "position": 1,
-  "link": {
-    "type": "generated-index",
-    "description": "Introduction to AI, Generative AI, RAG, and LangChain fundamentals"
-  }
-}
-

@@ -1,0 +1,8 @@
+{
+  "label": "Advanced: Data Advanced",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Advanced Data topics including Data Engineering, Data Science, and Data Analytics"
+  }
+}
