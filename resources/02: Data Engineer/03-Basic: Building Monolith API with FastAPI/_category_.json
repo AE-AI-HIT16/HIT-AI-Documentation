@@ -1,0 +1,9 @@
+{
+  "label": "Basic: Building Monolith API with FastAPI",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Foundation, Data Modeling, Database Setup, CRUD, Authentication, Authorization, Testing, and Deployment"
+  }
+}
+

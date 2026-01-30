@@ -38,14 +38,15 @@ const config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'fresherSidebar',
+          sidebarId: 'aiEngineerSidebar',
           position: 'left',
-          label: 'Fresher',
+          label: 'AI Engineer',
         },
         {
-          to: '/tutorial',
+          type: 'docSidebar',
+          sidebarId: 'dataEngineerSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Data Engineer',
         },
       ],
     },
@@ -67,21 +68,20 @@ const config = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          path: 'resources',
-          routeBasePath: "docs",
+          path: 'resources/01: AI Engineer',
+          routeBasePath: "/ai-engineer",
           sidebarPath: require.resolve("./sidebars.js"),
           sidebarCollapsible: true,
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
         },
-        blog: {
-          path: 'tutorials',
-          routeBasePath: '/tutorial',
-          blogTitle: 'Tutorials',
-          blogDescription: 'Tutorials and guides',
-          postsPerPage: 10,
-          showReadingTime: true,
-          authorsMapPath: '../blog/authors.yml',
+        docs: {
+          path: 'resources/02: Data Engineer',
+          routeBasePath: "/data-engineer",
+          sidebarPath: require.resolve("./sidebars.js"),
+          sidebarCollapsible: true,
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
