@@ -2,10 +2,14 @@ import React from 'react';
 import Content from '@theme-original/DocItem/Content';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
-import authors from '@site/resources/authors.yml';
+import authorsAI from '@site/resources/01: AI Engineer/authors.yml';
+import authorsData from '@site/resources/02: Data Engineer/authors.yml';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 import GiscusComponent from '@site/src/components/GiscusComponent';
+
+// Merge authors for easy lookup
+const allAuthors = { ...authorsAI, ...authorsData };
 
 function Author({ author }) {
   const { name, title, url, image_url } = author;
@@ -32,7 +36,7 @@ function AuthorsList({ authors }) {
   }
   return (
     <div className={clsx('margin-bottom--lg', styles.authorsContainer)}>
-      <span className={styles.authorsLabel}>Written by:</span>
+      <span className={styles.authorsLabel}>WRITTEN BY:</span>
       <div className={styles.authorsList}>
         {authors.map((author, idx) => (
           <Author key={idx} author={author} />
@@ -45,11 +49,9 @@ function AuthorsList({ authors }) {
 export default function ContentWrapper(props) {
   const { frontMatter } = useDoc();
 
-  // Resolve authors from frontmatter using the authors.yml data
+  // Resolve authors from frontmatter using the merged authors data
   const docAuthors = (frontMatter.authors || []).map(authorId => {
-    // If authors.yml is an object (map), access by key
-    // If it's a list, filter (but usually it's a map for ID lookups)
-    return authors[authorId] || null;
+    return allAuthors[authorId] || null;
   }).filter(Boolean);
 
   return (

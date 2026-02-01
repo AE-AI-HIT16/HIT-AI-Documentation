@@ -1,0 +1,32 @@
+.readingTime {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--ifm-color-emphasis-600);
+    padding: 0.25rem 0.75rem;
+    background-color: var(--ifm-color-emphasis-100);
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+}
+
+.readingTime:hover {
+    background-color: var(--ifm-color-emphasis-200);
+}
+
+.readingTime svg {
+    flex-shrink: 0;
+}
+
+.readingTime span {
+    font-weight: 500;
+}
+
+html[data-theme='dark'] .readingTime {
+    background-color: var(--ifm-color-emphasis-200);
+    color: var(--ifm-color-emphasis-700);
+}
+
+html[data-theme='dark'] .readingTime:hover {
+    background-color: var(--ifm-color-emphasis-300);
+}
