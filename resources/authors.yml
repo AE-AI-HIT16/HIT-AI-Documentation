@@ -5,13 +5,13 @@ TienPD:
 
 DongPD:
   name: Pham Dang Dong
-  title: AI/Data Engineer @ Savvycom | HIT Club
-  image_url: https://avatars.githubusercontent.com/u/105115138?v=4
+  title: AI/Data Engineer @ ATIN | HIT Club
+  image_url: /img/people/dongpd.jpg
 
 CuongNN:
   name: Nguyen Ngoc Cuong
-  title: AI/Data Engineer @ Savvycom | HIT Club
-  image_url: https://avatars.githubusercontent.com/u/158993945?v=4
+  title: AI/Data Engineer @ HIT Club
+  image_url: https://avatars.githubusercontent.com/u/147835234?v=4
 
 CuongLD:
   name: Lam Duc Cuong
@@ -25,5 +25,5 @@ HoangNH:
 
 ChienDD:
   name: Dao Duy Chien
-  title: AI Engineer @ 
+  title: AI Engineer @ ATIN | HIT Club 
   image_url: https://avatars.githubusercontent.com/u/140735022?v=4
