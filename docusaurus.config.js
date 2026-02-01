@@ -49,6 +49,10 @@ const config = {
           position: 'left',
           label: 'Data Engineer',
         },
+        {
+          type: 'custom-user',
+          position: 'right',
+        },
       ],
     },
     footer: {
