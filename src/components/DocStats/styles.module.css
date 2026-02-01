@@ -17,10 +17,6 @@
 
 .container {
     margin-bottom: 2rem;
-    padding: 1rem;
-    background: var(--ifm-color-emphasis-0);
-    border-radius: 10px;
-    border: 1px solid var(--ifm-color-emphasis-200);
 }
 
 .reactions {

@@ -69,15 +69,13 @@ const DocStats = () => {
     }, []);
 
     return (
-        <div className={styles.container}>
-            <div className={styles.docStats}>
-                <span className={styles.statItem}>
-                    👁️ {views} views
-                </span>
-                <span className={styles.statItem}>
-                    ⏱️ {readingTime} min read
-                </span>
-            </div>
+        <div className={styles.docStats}>
+            <span className={styles.statItem}>
+                👁️ {views} views
+            </span>
+            <span className={styles.statItem}>
+                ⏱️ {readingTime} min read
+            </span>
         </div>
     );
 };

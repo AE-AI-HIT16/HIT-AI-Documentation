@@ -3,8 +3,7 @@
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
-  background-color: #f9f9f9;
-  /* Light gray background */
+  background-color: var(--ifm-color-emphasis-100);
   border-radius: 4px;
   /* Slight radius */
   border-left: 4px solid #ff7b54;
@@ -55,7 +54,7 @@
 }
 
 .author :global(.avatar__subtitle) {
-  color: #333;
+  color: var(--ifm-color-content-secondary);
   font-size: 0.9rem;
   margin-top: 0.1rem;
   display: block;
