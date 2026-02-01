@@ -110,12 +110,14 @@ const config = {
       },
     ],
     [
-      require.resolve('docusaurus-lunr-search'),
+      require.resolve("@easyops-cn/docusaurus-search-local"),
       {
-        languages: ['en'],
-        indexBaseUrl: true,
-        highlightResult: true,
-        maxHits: 10,
+        hashed: true,
+        language: ["en"],
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        indexDocs: true,
+        indexBlog: true,
       },
     ],
     () => ({

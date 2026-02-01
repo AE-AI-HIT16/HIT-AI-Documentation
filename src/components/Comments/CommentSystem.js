@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Auth/AuthContext';
 import { db } from '../../firebase-config';
-import { collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp, doc } from 'firebase/firestore';
+import ReactionBar from '../Reactions/ReactionBar';
 import styles from './CommentSystem.module.css';
 
 const CommentSystem = ({ pageId }) => {
@@ -101,6 +102,9 @@ const CommentSystem = ({ pageId }) => {
                                 </span>
                             </div>
                             <p className={styles.text}>{comment.text}</p>
+                            <div className={styles.commentReactions}>
+                                <ReactionBar docRef={doc(db, "comments", comment.id)} size="small" />
+                            </div>
                         </div>
                     </div>
                 ))}

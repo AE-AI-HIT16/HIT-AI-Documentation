@@ -1,0 +1,30 @@
+.docStats {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--ifm-color-emphasis-600);
+}
+
+.statItem {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--ifm-color-emphasis-100);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+}
+
+.container {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: var(--ifm-color-emphasis-0);
+    border-radius: 10px;
+    border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.reactions {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--ifm-color-emphasis-200);
+}
