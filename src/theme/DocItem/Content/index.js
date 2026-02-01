@@ -6,7 +6,6 @@ import authorsAI from '@site/resources/01: AI Engineer/authors.yml';
 import authorsData from '@site/resources/02: Data Engineer/authors.yml';
 import clsx from 'clsx';
 import styles from './styles.module.css';
-import GiscusComponent from '@site/src/components/GiscusComponent';
 
 // Merge authors for easy lookup
 const allAuthors = { ...authorsAI, ...authorsData };
@@ -46,6 +45,10 @@ function AuthorsList({ authors }) {
   );
 }
 
+import DocStats from '@site/src/components/DocStats';
+
+// ... (existing imports)
+
 export default function ContentWrapper(props) {
   const { frontMatter } = useDoc();
 
@@ -56,9 +59,9 @@ export default function ContentWrapper(props) {
 
   return (
     <>
+      <DocStats />
       <AuthorsList authors={docAuthors} />
       <Content {...props} />
-      <GiscusComponent />
     </>
   );
 }
