@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import { db } from '../../firebase-config';
 import { doc, onSnapshot, setDoc, updateDoc, increment, getDoc } from 'firebase/firestore';
-import ReactionBar from '../Reactions/ReactionBar';
 import styles from './styles.module.css';
 
 // Simple function to estimate reading time (200 words per minute)
@@ -78,9 +77,6 @@ const DocStats = () => {
                 <span className={styles.statItem}>
                     ⏱️ {readingTime} min read
                 </span>
-            </div>
-            <div className={styles.reactions}>
-                <ReactionBar docRef={doc(db, "page_stats", safeId)} />
             </div>
         </div>
     );

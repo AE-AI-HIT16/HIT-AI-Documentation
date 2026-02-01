@@ -5,6 +5,7 @@ import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import authorsAI from '@site/resources/01: AI Engineer/authors.yml';
 import authorsData from '@site/resources/02: Data Engineer/authors.yml';
 import clsx from 'clsx';
+import GiscusComponent from '@site/src/components/GiscusComponent';
 import styles from './styles.module.css';
 
 // Merge authors for easy lookup
@@ -62,6 +63,9 @@ export default function ContentWrapper(props) {
       <DocStats />
       <AuthorsList authors={docAuthors} />
       <Content {...props} />
+      <div style={{ marginTop: '2rem' }}>
+        <GiscusComponent />
+      </div>
     </>
   );
 }
