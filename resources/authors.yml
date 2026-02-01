@@ -1,19 +1,29 @@
-HungHM15:
-  name: Hung Hoang Manh
-  title: AI Engineer @ FHN.NGT
-  image_url: /img/people/hunghm15.jpg
+TienPD:
+  name: Pham Dinh Tien
+  title: AI/Data Engineer @ Savvycom | HIT Club
+  image_url: https://avatars.githubusercontent.com/u/201255545?v=4&size=64
 
-TrungNT167:
-  name: Trung Nguyen Tran
-  title: AI Engineer @ FHN.NGT
-  image_url: https://github.com/trungnt167.png
+DongPD:
+  name: Pham Dang Dong
+  title: AI/Data Engineer @ ATIN | HIT Club
+  image_url: /img/people/dongpd.jpg
 
-DungNQ49:
-  name: Dung Nguyen Quang
-  title: AI Engineer @ FHN.NGT
-  image_url: /img/people/dungnq49.png
+CuongNN:
+  name: Nguyen Ngoc Cuong
+  title: AI/Data Engineer @ HIT Club
+  image_url: https://avatars.githubusercontent.com/u/147835234?v=4
 
-HoangNM105:
-  name: Hoang Nguyen Minh
-  title: AI Engineer @ FHN.NGT
-  image_url: /img/people/hoangnm105.jpg
+CuongLD:
+  name: Lam Duc Cuong
+  title: AI Engineer @ HIT Club
+  image_url: https://avatars.githubusercontent.com/u/185385191?v=4
+
+HoangNH:
+  name: Nguyen Huy Hoang
+  title: AI Engineer @ Savvycom | HIT Club
+  image_url: https://avatars.githubusercontent.com/u/105115138?v=4
+
+ChienDD:
+  name: Dao Duy Chien
+  title: AI Engineer @ ATIN | HIT Club 
+  image_url: https://avatars.githubusercontent.com/u/140735022?v=4

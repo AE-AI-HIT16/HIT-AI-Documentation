@@ -2,13 +2,13 @@ import React from 'react';
 import Content from '@theme-original/DocItem/Content';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
-import authorsAI from '@site/resources/01: AI Engineer/authors.yml';
-import authorsData from '@site/resources/02: Data Engineer/authors.yml';
+import authors from '@site/resources/authors.yml';
 import clsx from 'clsx';
+import GiscusComponent from '@site/src/components/GiscusComponent';
 import styles from './styles.module.css';
 
 // Merge authors for easy lookup
-const allAuthors = { ...authorsAI, ...authorsData };
+const allAuthors = { ...authors };
 
 function Author({ author }) {
   const { name, title, url, image_url } = author;
@@ -62,6 +62,9 @@ export default function ContentWrapper(props) {
       <DocStats />
       <AuthorsList authors={docAuthors} />
       <Content {...props} />
+      <div style={{ marginTop: '2rem' }}>
+        <GiscusComponent />
+      </div>
     </>
   );
 }

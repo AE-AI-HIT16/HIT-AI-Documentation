@@ -33,7 +33,6 @@ export default function Home() {
       description="Tech, Code, and Everything In Between">
       <HomepageHeader />
       <main>
-        This is the doucumentation blog for AE-AI-HIT16 team.
       </main>
     </Layout>
   );
