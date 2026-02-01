@@ -3,17 +3,24 @@
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
-  background-color: var(--ifm-color-emphasis-100);
-  border-radius: var(--ifm-global-radius);
-  border-left: 4px solid var(--ifm-color-primary);
+  background-color: #f9f9f9;
+  /* Light gray background */
+  border-radius: 4px;
+  /* Slight radius */
+  border-left: 4px solid #ff7b54;
+  /* Orange border matching the text */
+  margin-bottom: 2rem;
 }
 
 .authorsLabel {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 700;
-  color: var(--ifm-color-emphasis-600);
+  color: #9aa1a9;
+  /* Muted gray for label */
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
 .authorsList {
@@ -25,10 +32,31 @@
 .author {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
-/* Adjustments for the avatar component to look good in this context */
-.author .avatar__photo {
+/* Adjustments for the avatar component */
+.author :global(.avatar__photo) {
   width: 48px;
   height: 48px;
+  border-radius: 50%;
+}
+
+.author :global(.avatar__name) {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.author :global(.avatar__name a) {
+  color: #ff7b54 !important;
+  /* Orange color for name */
+  text-decoration: none;
+}
+
+.author :global(.avatar__subtitle) {
+  color: #333;
+  font-size: 0.9rem;
+  margin-top: 0.1rem;
+  display: block;
 }

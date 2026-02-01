@@ -1,0 +1,28 @@
+.docItemContainer header+*,
+.docItemContainer article>*:first-child {
+  margin-top: 0;
+}
+
+.docItemCol {
+  max-width: 75% !important;
+}
+
+.docMetadata {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 996px) {
+
+  /* Prevent hydration FOUC, as the mobile TOC needs to be server-rendered */
+  .docItemCol {
+    max-width: 100% !important;
+  }
+
+  .docMetadata {
+    margin-bottom: 1rem;
+  }
+}
