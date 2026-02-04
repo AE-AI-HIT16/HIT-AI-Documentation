@@ -1,0 +1,121 @@
+---
+title: Feature Store (Feast)
+description: Feast concepts and implementing a data ingestion pipeline.
+tags: ["Feast", "Feature Store", "ML", "Offline Store"]
+authors: ["TienPD"]
+sidebar_position: 7
+---
+
+# Feature Store (Feast)
+
+A Feature Store serves as the interface between data pipelines (Data Engineering) and model training/inference (Data Science). It ensures consistency between features used in training and features used in production.
+
+## Core Concepts
+*   **Offline Store:** High-capacity storage (Warehouse/Lake) for historical features. Used for generating training datasets. (e.g., BigQuery, S3).
+*   **Online Store:** Low-latency Key-Value store for serving features to models in real-time. (e.g., Redis, DynamoDB).
+*   **Feature View:** A logical grouping of features.
+*   **Entity:** The primary key(s) for the features (e.g., `user_id`, `driver_id`).
+*   **Materialization:** The process of loading data from the Offline Store to the Online Store.
+
+## Implement a Data Ingestion Pipeline
+
+**Scenario:** We want to serve driver statistics (daily trips, rating) to a pricing model.
+
+### 1. Define Feature Store Repository (`feature_store.yaml`)
+
+```yaml
+project: driver_ranking
+registry: data/registry.db
+provider: local
+online_store:
+  type: redis
+  connection_string: "localhost:6379"
+offline_store:
+  type: file
+```
+
+### 2. Define Features (`features.py`)
+
+```python
+from feast import Entity, FeatureView, Field, FileSource, ValueType
+from datetime import timedelta
+
+# 1. Define Entity
+driver = Entity(name="driver", join_keys=["driver_id"])
+
+# 2. Define Source (Offline)
+driver_stats_source = FileSource(
+    path="data/driver_stats.parquet",
+    timestamp_field="event_timestamp",
+    created_timestamp_column="created",
+)
+
+# 3. Define Feature View
+driver_stats_view = FeatureView(
+    name="driver_stats",
+    entities=[driver],
+    ttl=timedelta(days=1),
+    schema=[
+        Field(name="daily_trips", dtype=ValueType.INT64),
+        Field(name="avg_rating", dtype=ValueType.FLOAT),
+    ],
+    online=True,
+    source=driver_stats_source,
+    tags={"team": "driver_performance"},
+)
+```
+
+### 3. Ingest and Synchronize (Materialization)
+
+This is the pipeline step. You typically run this via a scheduler (Airflow) periodically.
+
+**Command Line:**
+```bash
+# Apply registry changes
+feast apply
+
+# Materialize data from Offline to Online store
+# Sync data from 1 day ago to now
+feast materialize-incremental 2023-10-01T00:00:00
+```
+
+**Python (for Airflow):**
+
+```python
+from feast import FeatureStore
+from datetime import datetime
+
+store = FeatureStore(repo_path=".")
+
+print("Synchronizing Online Store...")
+store.materialize_incremental(end_date=datetime.now())
+print("Sync Complete.")
+```
+
+### 4. Fetch Features (Model Serving)
+
+**Training (Historical Retrieval):**
+
+```python
+training_df = store.get_historical_features(
+    entity_df=entity_df,
+    features=[
+        "driver_stats:daily_trips",
+        "driver_stats:avg_rating"
+    ],
+).to_df()
+```
+
+**Serving (Online Retrieval):**
+
+```python
+features = store.get_online_features(
+    features=[
+        "driver_stats:daily_trips",
+        "driver_stats:avg_rating"
+    ],
+    entity_rows=[{"driver_id": 1001}]
+).to_dict()
+
+print(features)
+```

@@ -1,8 +1,0 @@
-{
-  "label": "LangGraph & Agentic AI",
-  "position": 3,
-  "link": {
-    "type": "generated-index",
-    "description": "LangGraph Foundations, Agentic Patterns, Tool Calling, Multi-Agent Collaboration"
-  }
-}

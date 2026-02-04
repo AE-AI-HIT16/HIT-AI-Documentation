@@ -1,0 +1,106 @@
+---
+title: Streaming Processing (Flink)
+description: Flink architecture, concepts, and building a pipeline with backfill.
+tags: ["Flink", "Streaming", "Kafka", "Event Time"]
+authors: ["TienPD"]
+sidebar_position: 5
+---
+
+# Streaming Processing & Apache Flink
+
+Streaming processing involves processing data in motion, as it enters the system. Apache Flink is a stateful computations over data streams engine.
+
+## Stream Concepts
+*   **Unbounded Data:** Data that has a start but no defined end.
+*   **Event Time vs. Processing Time:**
+    *   *Event Time:* Time when the event actually happened (timestamp in the event).
+    *   *Processing Time:* Time when the event is observed by the machine.
+*   **Watermarks:** A mechanism to handle late data in event-time processing. A watermark (t) declares "I believe no more events with timestamp < t will arrive."
+*   **Stateful Stream Processing:** remembering information across events (e.g., counting events per minute).
+
+## Apache Flink Architecture
+*   **JobManager:** Coordinates the distributed execution of the application: it decides when to schedule the next task (or set of tasks), reacts to finished tasks or execution failures, coordinates checkpoints, and coordinates recovery on failures.
+*   **TaskManager:** The workers that execute the tasks of a dataflow.
+*   **DataStream API:** Core API for stream processing.
+*   **Table API & SQL:** Unified relational APIs for batch and stream processing.
+
+## Developing a Flink Architecture
+
+### Scenario
+Real-time ad click fraud detection. We need to aggregate clicks per user in 1-hour windows.
+
+### Implementation Guide (Java/Flink DataStream API)
+
+**1. Sourcing Data (Kafka Source)**
+
+```java
+KafkaSource<String> source = KafkaSource.<String>builder()
+    .setBootstrapServers("kafka:9092")
+    .setTopics("ad-clicks")
+    .setGroupId("my-group")
+    .setStartingOffsets(OffsetsInitializer.earliest())
+    .setValueOnlyDeserializer(new SimpleStringSchema())
+    .build();
+
+DataStream<String> stream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
+```
+
+**2. Transformation & Windows**
+
+```java
+DataStream<ClickEvent> clickEvents = stream.map(json -> parse(json))
+    .assignTimestampsAndWatermarks(
+        WatermarkStrategy.<ClickEvent>forBoundedOutOfOrderness(Duration.ofSeconds(20))
+        .withTimestampAssigner((event, timestamp) -> event.timestamp)
+    );
+
+DataStream<ClickStats> stats = clickEvents
+    .keyBy(event -> event.userId)
+    .window(TumblingEventTimeWindows.of(Time.hours(1)))
+    .aggregate(new ClickAggregator());
+```
+
+**3. Sinking Data (JDBC Sink)**
+
+```java
+stats.addSink(JdbcSink.sink(
+    "INSERT INTO click_stats (user_id, count, window_end) VALUES (?, ?, ?)",
+    (statement, event) -> {
+        statement.setString(1, event.userId);
+        statement.setLong(2, event.count);
+        statement.setTimestamp(3, event.windowEnd);
+    },
+    JdbcExecutionOptions.builder().withBatchSize(1000).build(),
+    new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
+        .withUrl("jdbc:postgresql://db:5432/analytics")
+        .withDriverName("org.postgresql.Driver")
+        .build()
+));
+```
+
+### Building a Backfill Mechanism
+
+Backfilling is reprocessing historical data to correct errors or compute new metrics.
+
+**Strategy: Hybrid Source / Dual-Job Approach**
+
+In Flink, you can handle backfill by treating historical data as just another stream.
+
+**Option A: Hybrid Source (Flink 1.14+)**
+
+Use `HybridSource` to read from S3 (Old Data) first, then seamlessly switch to Kafka (Live Data).
+
+```java
+HybridSource<String> hybridSource = HybridSource.builder(fileSource)
+    .addSource(kafkaSource)
+    .build();
+
+DataStream<String> stream = env.fromSource(hybridSource, ...);
+```
+
+**Option B: Independent Batch Job**
+If the logic is complex, run a separate Flink Batch job (or Spark job) reading from the Data Lake (S3) and writing to the *same* Sink (Database), but perhaps to a different table or version to avoid overwriting live data incorrectly.
+
+1.  **Stop** the Streaming Job (optional, depending on consistency needs).
+2.  **Run Batch Job:** Read S3 `2023-01-01` to `2023-10-01`. Compute aggregates. Upsert to DB.
+3.  **Resume Streaming Job:** Start from latest checkpoint or timestamp.

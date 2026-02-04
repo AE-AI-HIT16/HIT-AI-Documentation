@@ -1,8 +1,0 @@
-{
-  "label": "RAG & Optimization",
-  "position": 1,
-  "link": {
-    "type": "generated-index",
-    "description": "Advanced Indexing, Hybrid Search, Query Transformation, and Post-Retrieval techniques"
-  }
-}
