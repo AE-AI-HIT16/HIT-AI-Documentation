@@ -4,7 +4,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import authors from '@site/resources/authors.yml';
 import clsx from 'clsx';
-import GiscusComponent from '@site/src/components/GiscusComponent';
+import GitHubDiscussionComments from '@site/src/components/GitHubDiscussionComments';
+import LockScreen from '@site/src/components/LockScreen';
 import styles from './styles.module.css';
 
 // Merge authors for easy lookup
@@ -57,13 +58,32 @@ export default function ContentWrapper(props) {
     return allAuthors[authorId] || null;
   }).filter(Boolean);
 
+
+
+  // Check for release_date
+  if (frontMatter.release_date) {
+    const releaseDate = new Date(frontMatter.release_date);
+    const now = new Date();
+    // Reset time to start of day for fair comparison or keep precise?
+    // User input is likely YYYY-MM-DD, which defaults to UTC 00:00 usually or local.
+    // Let's stick to simple comparison.
+    if (now < releaseDate) {
+      return (
+        <>
+          <LockScreen releaseDate={frontMatter.release_date} />
+          {/* Optionally show authors or nothing else */}
+        </>
+      );
+    }
+  }
+
   return (
     <>
       <DocStats />
       <AuthorsList authors={docAuthors} />
       <Content {...props} />
       <div style={{ marginTop: '2rem' }}>
-        <GiscusComponent />
+        <GitHubDiscussionComments />
       </div>
     </>
   );

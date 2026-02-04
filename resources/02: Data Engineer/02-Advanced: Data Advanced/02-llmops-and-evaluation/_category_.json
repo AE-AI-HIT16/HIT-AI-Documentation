@@ -1,8 +1,0 @@
-{
-  "label": "LLMOps & Evaluation",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "RAGAS Evaluation Metrics, Observability with LangFuse/LangSmith, and Experiment Comparison"
-  }
-}

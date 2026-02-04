@@ -1,0 +1,80 @@
+---
+title: Data Engineering Core
+description: Core concepts of Data Engineering, including Data Architecture, Data Lake, Warehouse, Lakehouse, and more.
+tags: ["Data Engineering", "Architecture", "Data Lake", "Data Warehouse"]
+authors: ["TienPD"]
+sidebar_position: 1
+---
+
+# Data Engineering Core
+
+This section covers the fundamental concepts and architectural patterns that form the backbone of modern Data Engineering.
+
+## Data Architecture
+
+Data Architecture refers to the framework of rules, policies, standards, and models that govern and define the type of data collected, and how it is used, stored, managed, and integrated within an organization or system. It provides a formal approach to creating and managing data flow and how data is processed and secured.
+
+### Key Components
+- **Data Pipelines:** Automated processes that move data from source to destination.
+- **Cloud Computing:** scalable storage and processing power (AWS, GCP, Azure).
+- **Storage Systems:** Warehouses, Lakes, Lakehouses.
+- **Consumer Layer:** BI tools, ML models, Analysts.
+
+## Architectural Patterns
+
+### 1. Data Warehouse
+A logical collection of information, gathered from many different operational databases, that supports business analysis activities and decision-making tasks. It is primarily used for **OLAP** (Online Analytical Processing).
+
+*   **Characteristics:** Structured data, Schema-on-write, SQL-based.
+*   **Examples:** Snowflake, Google BigQuery, Amazon Redshift.
+
+### 2. Data Lake
+A centralized repository that allows you to store all your structured and unstructured data at any scale. You can store your data as-is, without having to first structure the data.
+
+*   **Characteristics:** Structured, semi-structured, unstructured data; Schema-on-read; Low cost storage.
+*   **Examples:** Amazon S3, Azure Data Lake Storage, Google Cloud Storage.
+
+### 3. Lambda Architecture
+An architecture designed to handle massive quantities of data by taking advantage of both batch and stream-processing methods.
+
+*   **Speed Layer (Real-time):** Processes high-velocity data to provide real-time views.
+*   **Batch Layer (Historical):** Manages the master dataset (immutable) and pre-computes batch views.
+*   **Serving Layer:** Indexes the batch views for low-latency querying.
+*   **Pros:** Balance between latency and throughput/fault-tolerance.
+*   **Cons:** Complexity of maintaining code in two different layers (batch & stream).
+
+### 4. Kappa Architecture
+A simplification of Lambda Architecture. It proposes that a single stream processing engine can handle both real-time data processing and historical data reprocessing.
+
+*   **Concept:** Everything is a stream. The batch layer is removed. To reprocess data, you replay the stream.
+*   **Pros:** Simpler codebase (one processing framework).
+*   **Cons:** Requires a robust streaming engine (like Flink or Kafka Streams).
+
+### 5. Data Lakehouse
+A new, open architecture that combines the best elements of data lakes and data warehouses. It enables analytics, machine learning, and BI on a single platform.
+
+*   **Features:**
+    *   **Transaction support (ACID):** Reliability for concurrent reads/writes.
+    *   **Schema enforcement:** Ensures data quality.
+    *   **Decoupled storage and compute:** Scale independently.
+    *   **Open formats:** Parquet, Avro, ORC.
+*   **Technologies:** Delta Lake, Apache Iceberg, Apache Hudi.
+
+### 6. Data Mart
+A subset of a data warehouse, focused on a specific business line or team (e.g., Marketing, Sales).
+
+*   **Purpose:** Provide specific users with quick access to relevant data.
+
+### 7. Data Mesh
+A decentralized sociotechnical approach to building complex data architectures. It treats data as a **product**.
+
+*   **Principles:**
+    *   Domain-oriented decentralized data ownership and architecture.
+    *   Data as a product.
+    *   Self-serve data infrastructure as a platform.
+    *   Federated computational governance.
+
+### 8. Data Fabric
+An architecture that facilitates the end-to-end integration of various data pipelines and cloud environments through the use of intelligent and automated systems.
+
+*   **Goal:** Provide a unified view of data across the enterprise, regardless of location.

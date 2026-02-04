@@ -1,0 +1,8 @@
+{
+  "label": "DataOps & Observability",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Pipeline monitoring, data quality, alerting"
+  }
+}

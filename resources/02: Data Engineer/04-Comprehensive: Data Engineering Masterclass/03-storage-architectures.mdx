@@ -1,0 +1,114 @@
+---
+title: Storage Architectures
+description: Deep dive into storage technologies and Data Lake -> Warehouse/Lakehouse transformation.
+tags: ["Storage", "Data Lake", "Delta Lake", "Iceberg", "MinIO"]
+authors: ["TienPD"]
+sidebar_position: 3
+---
+
+# Storage Architectures
+
+This section explains diverse storage technologies and guides you through building a Data Lake to Data Warehouse/Lakehouse architecture.
+
+## Storage Technologies
+
+### Object Storage & Distributed File Systems
+*   **MinIO:** High-performance, S3-compatible object storage. Kubernetes-native. Ideal for on-premise AI/ML and data lake workloads.
+*   **Google Cloud Storage (GCS):** Unified object storage for developers and enterprises.
+*   **HDFS (Hadoop Distributed File System):** Older standard for on-prem distributed storage, often replaced by object stores in modern cloud architectures.
+
+### Analytical Data Stores (Warehouses)
+*   **Google BigQuery:** Serverless, highly scalable, and cost-effective multi-cloud data warehouse designed for business agility. Supports SQL.
+
+### Open Table Formats (The Lakehouse Layer)
+These formats bring ACID transactions to data lakes.
+*   **Delta Lake:** Open-source storage layer that brings reliability to data lakes. Developed by Databricks. Integrates tightly with Spark.
+*   **Apache Iceberg:** High-performance format for huge analytic tables. Solves many consistency issues of Hive. Great schema evolution support.
+*   **Apache Hudi:** (Hadoop Upserts Deletes and Incrementals) Optimization for streaming data lakes. Great for upserts and near-real-time ingestion.
+
+## Building Data Lake -> Data Warehouse Architecture
+
+This is the traditional "Modern Data Stack" approach.
+
+1.  **Ingestion:** Raw data lands in the **Data Lake** (e.g., GCS/S3) in its native format (JSON, CSV, Log files). This is the *Landing Zone* or *Bronze Layer*.
+2.  **Processing (ETL/ELT):** A batch job (Spark/Dataproc) reads raw data, cleans it, enforces schema, and writes it to the **Data Warehouse** (BigQuery/Snowflake). This is the *Silver Layer*.
+3.  **Serving:** Data is aggregated and modeled for business users in the Warehouse. This is the *Gold Layer*.
+
+## Building a Lakehouse Architecture
+
+The Lakehouse simplifies the stack by keeping data in the object store but adding a transaction layer (Delta/Iceberg) so the Lake *acts* like a Warehouse.
+
+### Implementation Guide: Delta Lake Architecture
+
+**Objective:** Build a Medallion Architecture (Bronze -> Silver -> Gold) using Spark and Delta Lake.
+
+**Prerequisites:** Apache Spark environment with Delta Lake packages.
+
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("LakehouseDemo") \
+    .config("spark.jars.packages", "io.delta:delta-core_2.12:2.4.0") \
+    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
+    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
+    .getOrCreate()
+```
+
+### Bronze Layer (Raw Ingestion)
+Ingest raw JSON data and save as-is to Delta format.
+
+```python
+raw_path = "/tmp/lakehouse/bronze"
+# Simulate reading raw data
+df_raw = spark.read.json("/path/to/source/data.json")
+
+# Write to Bronze
+df_raw.write.format("delta").mode("append").save(raw_path)
+```
+
+### Silver Layer (Cleaned & Enriched)
+Read from Bronze, filter bad data, and enforce schema.
+
+```python
+from delta.tables import *
+
+bronze_path = "/tmp/lakehouse/bronze"
+silver_path = "/tmp/lakehouse/silver"
+
+df_bronze = spark.read.format("delta").load(bronze_path)
+
+# Transformation: Filter nulls and add processing timestamp
+from pyspark.sql.functions import current_timestamp, col
+
+df_silver = df_bronze.filter(col("user_id").isNotNull()) \
+                     .withColumn("processed_at", current_timestamp())
+
+# Write to Silver (Upsert/Merge pattern is common here)
+df_silver.write.format("delta").mode("overwrite").save(silver_path)
+```
+
+### Gold Layer (Aggregated Business Logic)
+Read from Silver, aggregate for specific business questions.
+
+```python
+silver_path = "/tmp/lakehouse/silver"
+gold_path = "/tmp/lakehouse/gold/daily_sales"
+
+df_silver = spark.read.format("delta").load(silver_path)
+
+# Business Logic: Daily sales count
+df_gold = df_silver.groupBy("date").count()
+
+# Write to Gold
+df_gold.write.format("delta").mode("overwrite").save(gold_path)
+```
+
+### Time Travel
+Delta Lake allows you to query older versions of the data.
+
+```python
+# Read version 0 of the Silver table
+df_v0 = spark.read.format("delta").option("versionAsOf", 0).load(silver_path)
+df_v0.show()
+```

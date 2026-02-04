@@ -1,0 +1,8 @@
+{
+  "label": "Advanced: Data Engineering",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Advanced Data Engineering: Spark tuning, DataOps, Observability, Real-time patterns"
+  }
+}

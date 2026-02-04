@@ -1,0 +1,8 @@
+{
+  "label": "Spark Advanced",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Spark tuning, partitioning, Delta Lake, Iceberg"
+  }
+}
