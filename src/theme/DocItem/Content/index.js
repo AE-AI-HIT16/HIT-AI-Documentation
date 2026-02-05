@@ -4,7 +4,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import authors from '@site/resources/authors.yml';
 import clsx from 'clsx';
-import GitHubDiscussionComments from '@site/src/components/GitHubDiscussionComments';
+import GiscusComponent from '@site/src/components/GiscusComponent';
 import LockScreen from '@site/src/components/LockScreen';
 import styles from './styles.module.css';
 
@@ -83,7 +83,7 @@ export default function ContentWrapper(props) {
       <AuthorsList authors={docAuthors} />
       <Content {...props} />
       <div style={{ marginTop: '2rem' }}>
-        <GitHubDiscussionComments />
+        <GiscusComponent />
       </div>
     </>
   );
