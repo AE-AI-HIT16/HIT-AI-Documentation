@@ -46,9 +46,8 @@ function AuthorsList({ authors }) {
   );
 }
 
+// ... (imports)
 import DocStats from '@site/src/components/DocStats';
-
-// ... (existing imports)
 
 export default function ContentWrapper(props) {
   const { frontMatter } = useDoc();
@@ -58,20 +57,14 @@ export default function ContentWrapper(props) {
     return allAuthors[authorId] || null;
   }).filter(Boolean);
 
-
-
   // Check for release_date
   if (frontMatter.release_date) {
     const releaseDate = new Date(frontMatter.release_date);
     const now = new Date();
-    // Reset time to start of day for fair comparison or keep precise?
-    // User input is likely YYYY-MM-DD, which defaults to UTC 00:00 usually or local.
-    // Let's stick to simple comparison.
     if (now < releaseDate) {
       return (
         <>
           <LockScreen releaseDate={frontMatter.release_date} />
-          {/* Optionally show authors or nothing else */}
         </>
       );
     }
@@ -82,6 +75,7 @@ export default function ContentWrapper(props) {
       <DocStats />
       <AuthorsList authors={docAuthors} />
       <Content {...props} />
+
       <div style={{ marginTop: '2rem' }}>
         <GiscusComponent />
       </div>

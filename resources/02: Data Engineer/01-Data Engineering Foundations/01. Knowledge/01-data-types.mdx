@@ -7,3 +7,45 @@ release_date: 2026-02-05
 ---
 
 # Data Types
+
+Here is a quick quiz to test your knowledge about Data Engineering types!
+
+<Quiz 
+  questions={[
+    {
+      question: "Which of the following is NOT a common primitive data type?",
+      options: ["Integer", "String", "DataFrame", "Boolean"],
+      correct: 2,
+      explanation: "DataFrame is a complex data structure (typically table-like), not a primitive data type like Integer or Boolean."
+    },
+    {
+      question: "In Python, what is the type of the value 3.14?",
+      options: ["int", "float", "decimal", "double"],
+      correct: 1,
+      explanation: "In Python, 3.14 is represented as a 'float'. Python does not have native 'double' type (it uses float for double precision)."
+    }
+  ]}
+/>
+
+<br/>
+
+### Live Code Demo
+Try running this Python code directly in your browser!
+
+<PythonEditor 
+  code={`
+# Example: Variable Types
+x = 10          # int
+y = 3.14        # float
+name = "HIT-AI" # str
+
+print(f"x is {type(x)}")
+print(f"y is {type(y)}")
+print(f"name is {type(name)}")
+
+# Simple math
+print(f"x + y = {x + y}")
+  `} 
+/>
+
+

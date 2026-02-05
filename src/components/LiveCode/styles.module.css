@@ -1,0 +1,98 @@
+.editorContainer {
+    margin: 2rem 0;
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.editorHeader {
+    background-color: var(--ifm-color-emphasis-100);
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--ifm-color-emphasis-700);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.runBtn {
+    background-color: #00c853;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.runBtn:hover:not(:disabled) {
+    background-color: #009624;
+}
+
+.runBtn:disabled {
+    background-color: var(--ifm-color-emphasis-300);
+    cursor: wait;
+}
+
+.editorArea {
+    /* Using prism theme colors or custom dark theme */
+    background-color: #f6f8fa;
+    /* Light mode default */
+    min-height: 150px;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+}
+
+[data-theme='dark'] .editorArea {
+    background-color: #1e1e1e;
+}
+
+.outputArea {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1rem;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+.outputLabel {
+    color: #888;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.loader {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
