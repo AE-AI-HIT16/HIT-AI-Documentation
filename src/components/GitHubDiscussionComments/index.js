@@ -77,7 +77,7 @@ function CreateDiscussionMutation() {
 
 function CommentItem({ comment }) {
   const { body, author, createdAt } = comment;
-  const date = new Date(createdAt).toLocaleDateString(undefined, {
+  const date = new Date(createdAt).toLocaleString(undefined, {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
