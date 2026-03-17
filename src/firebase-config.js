@@ -4,13 +4,13 @@ import { getAnalytics, isSupported } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBud_LsevmB1uut8rTrN1a0wc44yZpCjFw",
-    authDomain: "ai-documentation-c475a.firebaseapp.com",
-    projectId: "ai-documentation-c475a",
-    storageBucket: "ai-documentation-c475a.firebasestorage.app",
-    messagingSenderId: "786414479334",
-    appId: "1:786414479334:web:db9eb9c64a169336201827",
-    measurementId: "G-JMQ0LWX30L"
+    apiKey: "AIzaSyBvuAp4Y1tlUha9_ehRDK8VpQlliJNfbOQ",
+    authDomain: "hit-ai-documentation.firebaseapp.com",
+    projectId: "hit-ai-documentation",
+    storageBucket: "hit-ai-documentation.firebasestorage.app",
+    messagingSenderId: "664576057795",
+    appId: "1:664576057795:web:7238a717bf5b3367a05d76",
+    measurementId: "G-XJ4TTW7TLQ"
 };
 
 // Initialize Firebase
