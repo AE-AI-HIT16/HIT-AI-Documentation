@@ -4,7 +4,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import authors from '@site/resources/authors.yml';
 import clsx from 'clsx';
-import GitHubDiscussionComments from '@site/src/components/GitHubDiscussionComments';
+import CommentSystem from '@site/src/components/Comments/CommentSystem';
 import LockScreen from '@site/src/components/LockScreen';
 import styles from './styles.module.css';
 
@@ -51,7 +51,7 @@ import DocStats from '@site/src/components/DocStats';
 // ... (existing imports)
 
 export default function ContentWrapper(props) {
-  const { frontMatter } = useDoc();
+  const { frontMatter, metadata } = useDoc();
 
   // Resolve authors from frontmatter using the merged authors data
   const docAuthors = (frontMatter.authors || []).map(authorId => {
@@ -77,13 +77,15 @@ export default function ContentWrapper(props) {
     }
   }
 
+  const pageId = metadata?.slug || metadata?.id || 'unknown';
+
   return (
     <>
       <DocStats />
       <AuthorsList authors={docAuthors} />
       <Content {...props} />
       <div style={{ marginTop: '2rem' }}>
-        <GitHubDiscussionComments />
+        <CommentSystem pageId={pageId} />
       </div>
     </>
   );
