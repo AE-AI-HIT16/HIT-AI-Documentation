@@ -1,51 +1,50 @@
 ---
-title: "Data Types"
-description: "Data types in Data Engineering"
-tags: ["Data Engineering", "Data Types", "Fundamentals"]
+title: "Introduction to Data Engineering"
+description: "Introduction to Data Engineering"
+tags: ["Data Engineering", "Fundamentals"]
 authors: ["TienPD"]
-release_date: 2026-02-05
+release_date: 2026-03-23
 ---
 
-# Data Types
 
-Here is a quick quiz to test your knowledge about Data Engineering types!
+import TOCInline from '@theme/TOCInline';
 
-<Quiz 
-  questions={[
-    {
-      question: "Which of the following is NOT a common primitive data type?",
-      options: ["Integer", "String", "DataFrame", "Boolean"],
-      correct: 2,
-      explanation: "DataFrame is a complex data structure (typically table-like), not a primitive data type like Integer or Boolean."
-    },
-    {
-      question: "In Python, what is the type of the value 3.14?",
-      options: ["int", "float", "decimal", "double"],
-      correct: 1,
-      explanation: "In Python, 3.14 is represented as a 'float'. Python does not have native 'double' type (it uses float for double precision)."
-    }
-  ]}
-/>
+## Mục lục
+<TOCInline toc={toc} />
 
-<br/>
+## What 
 
-### Live Code Demo
-Try running this Python code directly in your browser!
 
-<PythonEditor 
-  code={`
-# Example: Variable Types
-x = 10          # int
-y = 3.14        # float
-name = "HIT-AI" # str
+## Introduction to Data Engineering
+- Data Engineering is process of **designing, building, and maintaining** **data pipelines** and  **data infrastructures** that allows
+organization to **collect, store, process, and analyze** their datasets
+- It serves as the backbone of any data-driven operation, ensuring data is available, reliable, and ready for use by analysts, data scientists, and machine learning engineers.
+- We need data engineering because of raw data from different sources like websites, mobile apps, social media, sensors, etc, is ofen messy, incomplete, and inconsistent, the primary goal
+of data engineering is to transform this data into clean structured, and accessible information.
 
-print(f"x is {type(x)}")
-print(f"y is {type(y)}")
-print(f"name is {type(name)}")
+## What does a data engineer do daily?
+- **Building data pipelines**: creating and mainting automated workflows that move, clean and transform data from source system (like databases, APIs, files) to storage system (like data warehouse, data lake)
+- **Managing Data Storage**: Selecting and implementing suitable storage solutions, from traditional relational databases (structured data)
+ to data lakes for holding amount of raw, unstructured data.
+- **Ensuring Data Quality**: Implementing validation checks to maintain the accuracy, consistency, and completeness of data.
+- **Optimizing Data Performance**: Tuning database queries, managing data partitions, and implementing caching strategies to ensure fast data retrieval and processing.
 
-# Simple math
-print(f"x + y = {x + y}")
-  `} 
-/>
+## Why is data engineering important?
+- Data-Driven Decision Making: Reliable data infrastructure enables organizations to make informed decisions based on accurate and timely information.
+- Scalability: Effective data engineering ensures that data systems can handle growing volumes of data and increasing user demands without performance degradation.
+- Data Accessibility: Well-designed data pipelines and storage solutions make data easily accessible to those who need it, fostering collaboration and innovation.
+- Cost Efficiency: Optimized data pipelines and storage strategies can reduce operational costs associated with data management and processing.
+- Compliance and Security: Robust data governance practices ensure that data is handled in accordance with legal and regulatory requirements, protecting both the organization and its users.
 
+## Key Skills of a Data Engineer
+- Programming Languages: Proficiency in languages like Python, Scala, and Java is essential for building data pipelines and automation scripts.
+- Database Management: Strong understanding of SQL and experience with relational databases (e.g., PostgreSQL, MySQL) and NoSQL databases (e.g., MongoDB, Cassandra).
+- Big Data Technologies: Familiarity with big data frameworks such as Apache Spark, Hadoop, and Flink for processing large datasets.
+- Cloud Platforms: Experience with cloud services like AWS (S3, Redshift, EMR), Google Cloud (BigQuery, Dataflow), and Azure (Data Lake Storage, Synapse Analytics).
+- ETL/ELT Tools: Knowledge of tools like Apache Airflow, dbt, and Talend for building and managing data pipelines.
+- Data Warehousing: Understanding of data warehouse concepts and experience with tools like Snowflake, Redshift, and BigQuery.
+- Data Modeling: Ability to design efficient data models that support analytical requirements.
+- Data Quality and Governance: Skills in implementing data quality checks, monitoring, and governance practices.
+- Problem-Solving: Strong analytical and problem-solving skills to troubleshoot data issues and optimize performance.
+- Communication: Ability to communicate technical concepts to both technical and non-technical stakeholders.
 
